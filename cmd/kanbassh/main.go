@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/gliderlabs/ssh"
-	"golang.org/x/term"
+	// "golang.org/x/term"
 )
 
 func main() {
