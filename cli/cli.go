@@ -3,12 +3,26 @@ package cli
 import (
 	"fmt"
 	"regexp"
-
+	"os"
+	"strings"
+	"path/filepath"
 	"github.com/gliderlabs/ssh"
 	"golang.org/x/term"
 	"github.com/razzlestorm/kanbassh/internal/entities"
 )
 
+	
+type CommandHandler struct {
+	Commands map[string]func([]string)
+} 
+
+func NewCommandHandler() *CommandHandler {
+	c := &CommandHandler{
+		Commands: make(map[string]func([]string)),
+	}
+	c.initCommands()
+	return c
+}
 
 var (
 	boards map[ssh.Session]*entities.Board
@@ -23,6 +37,51 @@ var (
 	moveTicket = regexp.MustCompile(`^/move_ticket.*`)
 )
 
+func (c *CommandHandler) initCommands() {
+	c.Commands["create_board"] = c.create_board
+	c.Commands["join"] = c.join_board
+	c.Commands["list"] = c.list_board
+	c.Commands["create_ticket"] = c.create_ticket
+	c.Commands["list_tickets"] = c.list_tickets
+	c.Commands["edit_ticket"] = c.edit_ticket
+	c.Commands["examine_ticket"] = c.examine_ticket
+	c.Commands["look_ticket"] = c.examine_ticket
+	c.Commands["move_ticket"] = c.move_ticket
+
+}
+
+
+func (c *CommandHandler) create_board(input []string) {
+	return
+}
+
+func (c *CommandHandler) join_board(input []string) {
+	return
+}
+
+func (c *CommandHandler) list_board(input []string) {
+	return
+}
+
+func (c *CommandHandler) create_ticket(input []string) {
+	return
+}
+
+func (c *CommandHandler) list_tickets(input []string) {
+	return
+}
+
+func (c *CommandHandler) edit_ticket(input []string) {
+	return
+}
+
+func (c *CommandHandler) examine_ticket(input []string) {
+	return
+}
+
+func (c *CommandHandler) move_ticket(input []string) {
+	return
+}
 func helpMsgGeneral() string {
 	return `
 Welcome to your friendly neighborhood kanban board. Please use one of the following commands:
