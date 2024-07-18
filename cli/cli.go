@@ -14,28 +14,18 @@ import (
 	
 type CommandHandler struct {
 	Commands map[string]func([]string)
+	User entities.User
 } 
 
-func NewCommandHandler() *CommandHandler {
+func NewCommandHandler(user entities.User) *CommandHandler {
 	c := &CommandHandler{
 		Commands: make(map[string]func([]string)),
+		User: user,
 	}
 	c.initCommands()
 	return c
 }
 
-var (
-	boards map[ssh.Session]*entities.Board
-	knownBoards []*entities.Board
-	createBoard = regexp.MustCompile(`^/create_board.*`)
-	joinBoard = regexp.MustCompile(`^/join.*`)
-	listBoards = regexp.MustCompile(`^/list.*`)
-	createTicket = regexp.MustCompile(`^/create_ticket.*`)
-	listTickets = regexp.MustCompile(`^/list_tickets.*`)
-	editTicket = regexp.MustCompile(`^/edit_ticket.*`)
-	examineTicket = regexp.MustCompile(`^/[examine_ticket]|[look_ticket].*`)
-	moveTicket = regexp.MustCompile(`^/move_ticket.*`)
-)
 
 func (c *CommandHandler) initCommands() {
 	c.Commands["create_board"] = c.create_board
@@ -52,6 +42,10 @@ func (c *CommandHandler) initCommands() {
 
 
 func (c *CommandHandler) create_board(input []string) {
+		
+//	knownBoards = append(knownBoards, )
+//	r := regexp.MustCompile("[^\\s,]+")
+//	cols := r.FindAllString()
 	return
 }
 
@@ -82,6 +76,8 @@ func (c *CommandHandler) examine_ticket(input []string) {
 func (c *CommandHandler) move_ticket(input []string) {
 	return
 }
+
+
 func helpMsgGeneral() string {
 	return `
 Welcome to your friendly neighborhood kanban board. Please use one of the following commands:
