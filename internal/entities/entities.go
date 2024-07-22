@@ -34,11 +34,41 @@ type Column struct {
 	Tickets []Ticket
 }
 
+func NewColumn(name string, tickets []string, users []User) *Column {
+	if len(name) < 1 {
+		panic("A new Column must have a name")
+	}
+	c := &Column{
+		Name: name,
+		Tickets: []Ticket{},
+	}
+	for _, ticket := range tickets {
+		c.Tickets = append(c.Tickets, Ticket{Name: ticket})
+	}
+	return c
+
+}
+
 type Ticket struct {
 	Name        string
 	Due_Date    time.Time
 	Description string
 	Assignee    User
+}
+
+
+func NewTicket(name string, date time.Time, description string, assignee User) *Ticket {
+	if len(name) < 1 {
+		panic("A new Ticket must have a name")
+	}
+	t := &Ticket{
+		Name: name,
+		Due_Date: date,
+		Description: description,
+		Assignee: assignee,
+	}
+	return t
+
 }
 
 type User struct {
